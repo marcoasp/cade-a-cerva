@@ -4,15 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>br.com.marco</groupId>
-		<artifactId>icerva</artifactId>
+		<groupId>br.com.marco.cadeacerva</groupId>
+		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>br.com.marco</groupId>
-	<artifactId>icerva-store</artifactId>
+	<groupId>br.com.marco.cadeacerva</groupId>
+	<artifactId>store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>icerva-store</name>
 
 	<dependencies>
 		<dependency>
