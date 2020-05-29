@@ -13,8 +13,8 @@ addons:
     token:
       secure: "l4Y6Z6uIZpbParcykpnU5JGxN3naB8bAAHwWPSmha8ekl26fQKP2z98PepVx4R9MB+9h1CpNZ2RcrkhUGoAGH4GmsScR72fEv8pU7vdjPjtfApUDhvWbel3OCCKKRigEEEMI4i5MC1/IoPxlQvcx6ZBd98EQUcTTbnZPWz9F0Cvx5OAJivvURe6HfvIMMA/zckJUWAWCR3WRQSHwWkAuXPYGPFNJanhgEvOVDD8+qkDPkKu6OoiM3wZ/5ITpbZaBypb7++WxAiZ+wGqktSyoYgj/pd+Rs80oCTU8y/yEd4PR0GHQxOtSe00Yk0FQrzUGSbrOUMm3BsF0qHOlugVA/3uVrmg++A5I5PTZFS1QnEN5l09IIFJ5wRSMSon87gV4wDVNomlHC9myyEJVGb2W1pY44rYadFRNNMlP9pG1BboVQ53YNy03FUyHFK/byIxPr/6B2KN7waF4ap110jNIrp/tkkkFnBcShhPXR+rXzMrGaTAmvWGYg6m3XsQUswjKK7LmwsuOZdNKsE7HtbGMiIZd3Jcmjvpnp1c1fOBh2A/tD01c52JCd9eJZntyCRGHF9cckJTqArv+GC6NJN/x3ki4L+f4vny7c73IfyJvSu/VBCQJkFrIyxWKpipRa1FobqqEhO87mMxZDQp7LXKbS6C5Jf1sL9FVuuXa5GjE9sY="
 
-script:
-  - ./mvnw clean verify sonar:sonar -Dsonar.projectKey=cade-a-cerva
+#script:
+#  - ./mvnw clean verify sonar:sonar -Dsonar.projectKey=cade-a-cerva
 
 branches:
   only:
