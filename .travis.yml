@@ -16,6 +16,11 @@ addons:
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
 
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: always # default: always
+
 branches:
   only:
     - master
