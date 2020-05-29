@@ -1,9 +1,11 @@
-package br.com.marco.cadeacerva.store.domain;
+package br.com.marco.cadeacerva.store.endpoint.dto;
 
+import br.com.marco.cadeacerva.store.domain.Store;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class StoreDTO {
     private final String id;

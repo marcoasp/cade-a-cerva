@@ -1,11 +1,13 @@
-package br.com.marco.cadeacerva.store.domain;
+package br.com.marco.cadeacerva.store.endpoint;
 
-import br.com.marco.cadeacerva.store.infra.exception.NotFoundException;
+import br.com.marco.cadeacerva.store.domain.Store;
+import br.com.marco.cadeacerva.store.endpoint.dto.StoreDTO;
+import br.com.marco.cadeacerva.store.domain.StoreRepository;
+import br.com.marco.cadeacerva.store.endpoint.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
