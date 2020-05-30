@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
 public class Store {
 
     private String id;
-
     @Setter
     private String name;
 
