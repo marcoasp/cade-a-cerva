@@ -1,7 +1,19 @@
 server:
   port: 8888
 
+logging:
+  level:
+    root: INFO
+    org.springframework.web.client.RestTemplate: DEBUG
+
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
+            client-secret: bi7TH03CVHR4KWZmkvx2tqd-
   cloud:
     gateway:
       discovery.locator.enabled: true
