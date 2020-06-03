@@ -3,8 +3,7 @@ server:
 
 logging:
   level:
-    root: INFO
-    org.springframework.web.client.RestTemplate: DEBUG
+    root: DEBUG
 
 spring:
   security:
@@ -14,15 +13,17 @@ spring:
           google:
             client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
             client-secret: bi7TH03CVHR4KWZmkvx2tqd-
-  cloud:
-    gateway:
-      discovery.locator.enabled: true
-      routes:
-        - id: store
-          uri: lb://store
-          predicates:
-          - Path=/store/**
-        - id: sales
-          uri: lb://sales
-          predicates:
-          - Path=/sale/**
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+zuul:
+  routes:
+    discovery.locator.enabled: true
+    routes:
+      store:
+        path: /store/**
+      sales:
+        path: /sale/**
