@@ -18,5 +18,7 @@ zuul:
     routes:
       store:
         path: /store/**
+        stripPrefix: true
       sales:
         path: /sale/**
+        stripPrefix: true

@@ -1,11 +1,67 @@
 version: "3"
 services:
+    registry:
+        image: omarcovelho/registry
+        ports:
+            - "8761:8080"
+        networks:
+            - vpc
+    config:
+        depends_on:
+            - registry
+        image: omarcovelho/config
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+        networks:
+            - vpc
+    store:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/store
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+        networks:
+            - vpc
+    sales:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/sales
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+        networks:
+            - vpc
+    users:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/users
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+        networks:
+            - vpc
+    gateway:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/gateway
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+        ports:
+            - "80:8080"
+        networks:
+            - vpc
     mongo:
         image: "mongo"
         volumes:
             - "storedb:/data/db"
-        ports:
-            - "27017:27017"
+        networks:
+            - vpc
     mongo-express:
         image: mongo-express
         ports:
@@ -14,5 +70,11 @@ services:
             ME_CONFIG_MONGODB_SERVER: mongo
             ME_CONFIG_MONGODB_ADMINUSERNAME: root
             ME_CONFIG_MONGODB_ADMINPASSWORD: password
+        networks:
+            - vpc
 volumes:
     storedb:
+
+networks:
+    vpc:
+        driver: bridge

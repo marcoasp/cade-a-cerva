@@ -1,6 +1,3 @@
-server:
-  port: 8081
-spring:
-  data:
-    mongodb:
-      database: store
+spring.data.mongodb:
+  host: mongo
+  database: store
