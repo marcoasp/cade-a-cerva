@@ -5,6 +5,8 @@ spring:
     name: users
   cloud:
     config:
+      username: ${CONFIG_USER:config}
+      password: ${CONFIG_PASSWORD:password}
       fail-fast: true
       discovery:
         enabled: true
