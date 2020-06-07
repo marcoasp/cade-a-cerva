@@ -33,7 +33,7 @@ branches:
 
 deploy:
   provider: script
-  script: bash docker_push
+  script: bash ./travis-scripts/docker_push
   on:
     branch:
       - master
