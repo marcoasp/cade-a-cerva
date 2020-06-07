@@ -1,0 +1,24 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
+            client-secret: {cipher}73282704539feadd5895d7ea1d027aa0cfc600b75e12c727383f6038ba4e69835a82883bc316e3691ef851dfb24d8aef%
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+zuul:
+  routes:
+    discovery.locator.enabled: true
+    routes:
+      store:
+        path: /store/**
+        stripPrefix: true
+      sales:
+        path: /sale/**
+        stripPrefix: true

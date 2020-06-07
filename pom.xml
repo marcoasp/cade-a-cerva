@@ -20,6 +20,8 @@
         <module>sales</module>
         <module>registry</module>
         <module>gateway</module>
+        <module>users</module>
+        <module>config</module>
     </modules>
 
     <dependencyManagement>
@@ -70,6 +72,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>omarcovelho/${project.artifactId}</name>
+                    </image>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>

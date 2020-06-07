@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        accept-empty: false
+        native:
+          searchLocations: 'classpath:/{application}/'
+encrypt.key: ${ENCRYPT_KEY:DEAF197CA5487461FFA4D46A523C2}
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl.defaultZone: ${EUREKA_ADDRESS:http://eureka:password@localhost:8761}/eureka

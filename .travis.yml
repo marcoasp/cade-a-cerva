@@ -1,27 +1,40 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
+
+env:
+  global:
+    - secure: ZOtuS25rh36TgaJY99P4OHWqnyviPgIHXA0t939YItbeU2oOqUZVLf+rWZsM9HfOpMZXGq78BkqBVU4kY8LAwCr5RkkTCG+y6oe+d3vmjvNUq8gcyD9AOp35YprEZwowdn6B1qagalm+cRBQKTrUM0rQ7DoLeaaXzED342VHGoeUOhl9j7nCJFPcdfLw75YFHW7m/vhciJnig5AoSPxG24XvyXDnzP3INluP8wlcdPH2JFaN4rDY+jMbvVxWjjVET/IykERJpiOZDkzibSugVcgYnAUgQtL7KrPo4CzjUBum/QSiNEL24cPSd55EsgVVXUtUWO3/YsQpGKbTvFK6o3ZYl9I6cE3ZlyHvagAkI5r3s+r1bjK/kAT2oZIBJ/BY0ePo9cNyZnUd5N/rRss2lQcITUgrUrLhgLeGdD0/zM9jGEcyB0EiU1+0OEKSRy4BJY7jbxTWT53WShPcoSZScNadhJPnO/UOM9uBZ9l/XblPVujoNQgvIFmBwZWOlfnr3QRYXBe2ZeN6FpSlEAaWEXOuMMBhto1YqQwDCmM4JmgE0lHeSv/bRlOW4LZqzNQ6N49VFmSWKnLNA/AWl38OwZqKwuCoNM62tLoBexgNKe37lzZJ4+6m35KVkbrL/0Y4KcSomnsimlPhVrhCSoQcSfp8Cv7cjkKKNjV6C50xw9E=
+    - secure: b3+9FW9fb4T0h1ZlRstKTWqNZKo37xRQVtCNnYF5E/HChK7yLuvVCRHLdZSBibZfNl6TNVxp1vjYEOmltcX2HwD227xl5iwgUFBtwwI+kEWG5BDDxLt6PTSEjDLhrFMcgzgF7+avhvHf8f8m8ISCbWvS+77QwfofbJNam6c/bLCrqnZ35NTUz+5yXlMdRLERpDkseytfC19YyH9qeAfB+p4eKYaW24qhNE2VjWWr+wvmFhJv24iig9hTZhMNGU7uQ5PwBfXDJRgGtuFvcxaSrQUtjMcaJj+AApgi2he3ynb80rkslRvoKOgRqN5xiRF4ndSvOSEylpKOQX/tIyAG0cVPqcXYlZW8hMH//CGbdlikfcF+/Mq5qYDQSrhVAV9efNQCOKexlWPNz4ceu1zBTyaEwkyYtUvxwTKWiRZ0kIQPcAuaNkByRa+0q6pgc5JOCf1XtN9pKgg3BOwHXbogjkX66I+n0MNIzDKccrhAJsrN4LOcFv4c2ZX2b457Lu/DId2CRFBegFaAINQUduqaEDrXbEQt9nzP9zxtA0iP2oH8zBf2DGhhkK1F8x89p0PzooJFWsYn4Q3xabbAFRTt1R2cNvb2pLfmAZwbb1bsYaO5+wPvvhjcJ09Vb0fAj67qRoonb1iHirTJNOFa74pdPUkplQpT3YEGDpxnlbj7iEU=
 
 cache:
   directories:
-    - $HOME/.m2
-    - $HOME/.sonar/cache
+  - "$HOME/.m2"
+  - "$HOME/.sonar/cache"
 
 addons:
   sonarcloud:
-    organization: "marcoasp"
+    organization: marcoasp
     token:
-      secure: "l4Y6Z6uIZpbParcykpnU5JGxN3naB8bAAHwWPSmha8ekl26fQKP2z98PepVx4R9MB+9h1CpNZ2RcrkhUGoAGH4GmsScR72fEv8pU7vdjPjtfApUDhvWbel3OCCKKRigEEEMI4i5MC1/IoPxlQvcx6ZBd98EQUcTTbnZPWz9F0Cvx5OAJivvURe6HfvIMMA/zckJUWAWCR3WRQSHwWkAuXPYGPFNJanhgEvOVDD8+qkDPkKu6OoiM3wZ/5ITpbZaBypb7++WxAiZ+wGqktSyoYgj/pd+Rs80oCTU8y/yEd4PR0GHQxOtSe00Yk0FQrzUGSbrOUMm3BsF0qHOlugVA/3uVrmg++A5I5PTZFS1QnEN5l09IIFJ5wRSMSon87gV4wDVNomlHC9myyEJVGb2W1pY44rYadFRNNMlP9pG1BboVQ53YNy03FUyHFK/byIxPr/6B2KN7waF4ap110jNIrp/tkkkFnBcShhPXR+rXzMrGaTAmvWGYg6m3XsQUswjKK7LmwsuOZdNKsE7HtbGMiIZd3Jcmjvpnp1c1fOBh2A/tD01c52JCd9eJZntyCRGHF9cckJTqArv+GC6NJN/x3ki4L+f4vny7c73IfyJvSu/VBCQJkFrIyxWKpipRa1FobqqEhO87mMxZDQp7LXKbS6C5Jf1sL9FVuuXa5GjE9sY="
+      secure: l4Y6Z6uIZpbParcykpnU5JGxN3naB8bAAHwWPSmha8ekl26fQKP2z98PepVx4R9MB+9h1CpNZ2RcrkhUGoAGH4GmsScR72fEv8pU7vdjPjtfApUDhvWbel3OCCKKRigEEEMI4i5MC1/IoPxlQvcx6ZBd98EQUcTTbnZPWz9F0Cvx5OAJivvURe6HfvIMMA/zckJUWAWCR3WRQSHwWkAuXPYGPFNJanhgEvOVDD8+qkDPkKu6OoiM3wZ/5ITpbZaBypb7++WxAiZ+wGqktSyoYgj/pd+Rs80oCTU8y/yEd4PR0GHQxOtSe00Yk0FQrzUGSbrOUMm3BsF0qHOlugVA/3uVrmg++A5I5PTZFS1QnEN5l09IIFJ5wRSMSon87gV4wDVNomlHC9myyEJVGb2W1pY44rYadFRNNMlP9pG1BboVQ53YNy03FUyHFK/byIxPr/6B2KN7waF4ap110jNIrp/tkkkFnBcShhPXR+rXzMrGaTAmvWGYg6m3XsQUswjKK7LmwsuOZdNKsE7HtbGMiIZd3Jcmjvpnp1c1fOBh2A/tD01c52JCd9eJZntyCRGHF9cckJTqArv+GC6NJN/x3ki4L+f4vny7c73IfyJvSu/VBCQJkFrIyxWKpipRa1FobqqEhO87mMxZDQp7LXKbS6C5Jf1sL9FVuuXa5GjE9sY=
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
 
 notifications:
   email:
-    on_success: never # default: change
-    on_failure: always # default: always
+    on_success: never
+    on_failure: always
 
 branches:
   only:
-    - master
-    - dev
+  - master
+  - dev
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch:
+      - master
+      - dev

@@ -1,18 +1,94 @@
 version: "3"
 services:
-    storedb:
+    registry:
+        image: omarcovelho/registry
+        ports:
+            - "8761:8080"
+        networks:
+            - vpc
+        environment:
+            EUREKA_USER: "${EUREKA_USER}"
+            EUREKA_PASSWORD: "${EUREKA_PASSWORD}"
+    config:
+        depends_on:
+            - registry
+        image: omarcovelho/config
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+            SPRING_PROFILES_ACTIVE: native
+        networks:
+            - vpc
+    store:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/store
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+        networks:
+            - vpc
+    sales:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/sales
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+        networks:
+            - vpc
+    users:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/users
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+        networks:
+            - vpc
+    gateway:
+        depends_on:
+            - mongo
+            - config
+            - registry
+        image: omarcovelho/gateway
+        environment:
+            EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+        ports:
+            - "80:8080"
+        networks:
+            - vpc
+    mongo:
         image: "mongo"
         volumes:
             - "storedb:/data/db"
-        ports:
-            - "27017:27017"
+        networks:
+            - vpc
     mongo-express:
         image: mongo-express
         ports:
             - 8090:8081
         environment:
-            ME_CONFIG_MONGODB_SERVER: storedb
+            ME_CONFIG_MONGODB_SERVER: mongo
             ME_CONFIG_MONGODB_ADMINUSERNAME: root
             ME_CONFIG_MONGODB_ADMINPASSWORD: password
+        networks:
+            - vpc
 volumes:
     storedb:
+
+networks:
+    vpc:
+        driver: bridge

@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
+            client-secret: bi7TH03CVHR4KWZmkvx2tqd-
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+zuul:
+  routes:
+    discovery.locator.enabled: true
+    routes:
+      store:
+        stripPrefix: true
+        path: /store/**
+      sales:
+        stripPrefix: true
+        path: /sale/**
