@@ -6,12 +6,20 @@ services:
             - "8761:8080"
         networks:
             - vpc
+        environment:
+            EUREKA_USER: "${EUREKA_USER}"
+            EUREKA_PASSWORD: "${EUREKA_PASSWORD}"
     config:
         depends_on:
             - registry
         image: omarcovelho/config
+        ports:
+          - "8888:8080"
         environment:
             EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+            SPRING_PROFILES_ACTIVE: native
         networks:
             - vpc
     store:
@@ -22,6 +30,8 @@ services:
         image: omarcovelho/store
         environment:
             EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
     sales:
@@ -32,6 +42,8 @@ services:
         image: omarcovelho/sales
         environment:
             EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
     users:
@@ -42,6 +54,8 @@ services:
         image: omarcovelho/users
         environment:
             EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
     gateway:
@@ -52,6 +66,8 @@ services:
         image: omarcovelho/gateway
         environment:
             EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+            CONFIG_USER: "${CONFIG_USER}"
+            CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         ports:
             - "80:8080"
         networks:

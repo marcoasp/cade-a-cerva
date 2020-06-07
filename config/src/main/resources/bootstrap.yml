@@ -7,6 +7,7 @@ spring:
         accept-empty: false
         native:
           searchLocations: 'classpath:/{application}/'
+encrypt.key: ${ENCRYPT_KEY:DEAF197CA5487461FFA4D46A523C2}
 eureka:
   client:
     registerWithEureka: true

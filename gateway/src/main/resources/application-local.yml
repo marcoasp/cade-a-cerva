@@ -20,6 +20,8 @@ zuul:
     discovery.locator.enabled: true
     routes:
       store:
+        stripPrefix: true
         path: /store/**
       sales:
+        stripPrefix: true
         path: /sale/**
