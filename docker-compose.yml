@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 services:
     registry:
         image: omarcovelho/registry
@@ -9,6 +9,12 @@ services:
         environment:
             EUREKA_USER: "${EUREKA_USER}"
             EUREKA_PASSWORD: "${EUREKA_PASSWORD}"
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     config:
         depends_on:
             - registry
@@ -20,6 +26,14 @@ services:
             SPRING_PROFILES_ACTIVE: native
         networks:
             - vpc
+        ports:
+          - "8888:8080"
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     store:
         depends_on:
             - mongo
@@ -32,6 +46,12 @@ services:
             CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     sales:
         depends_on:
             - mongo
@@ -44,6 +64,12 @@ services:
             CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     users:
         depends_on:
             - mongo
@@ -56,6 +82,12 @@ services:
             CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
             - vpc
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     gateway:
         depends_on:
             - mongo
@@ -70,10 +102,18 @@ services:
             - "80:8080"
         networks:
             - vpc
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 20s
     mongo:
         image: "mongo"
         volumes:
             - "storedb:/data/db"
+        ports:
+           - "27017:27017"
         networks:
             - vpc
     mongo-express:

@@ -10,11 +10,13 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class UserDTO {
 
-    public final String id;
-    public final String email;
+    private final String id;
+    private final String email;
+    private final double[] location;
 
     public UserDTO(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
+        this.location = user.getLocation();
     }
 }

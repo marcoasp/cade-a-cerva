@@ -1,6 +1,5 @@
-server.port: 0
-
 spring:
+  profiles: "!local"
   application:
     name: users
   cloud:
@@ -10,7 +9,6 @@ spring:
       fail-fast: true
       discovery:
         enabled: true
-
 eureka:
   client:
     registerWithEureka: true
