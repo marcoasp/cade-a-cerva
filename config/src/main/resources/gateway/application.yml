@@ -5,7 +5,7 @@ spring:
         registration:
           google:
             client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
-            client-secret: {cipher}73282704539feadd5895d7ea1d027aa0cfc600b75e12c727383f6038ba4e69835a82883bc316e3691ef851dfb24d8aef%
+            client-secret: '{cipher}33971f9bf99350db2f4f58e2869b627598cff7b2f1dd47afb98dc1b0814a0bbabf8840776e2e7a138dc5503b63858d9a'
 
 eureka:
   client:
@@ -17,8 +17,15 @@ zuul:
     discovery.locator.enabled: true
     routes:
       store:
+        prefix: /api
         path: /store/**
         stripPrefix: true
       sales:
-        path: /sale/**
+        prefix: /api
+        path: /api/sale/**
         stripPrefix: true
+      ui:
+        path: /**
+        stripPrefix: true
+
+logging.level.root: DEBUG

@@ -1,13 +1,13 @@
 spring:
   application:
     name: store
-  cloud:
-    config:
-      username: ${CONFIG_USER:config}
-      password: ${CONFIG_PASSWORD:password}
-      fail-fast: true
-      discovery:
-        enabled: true
+#  cloud:
+#    config:
+#      username: ${CONFIG_USER:config}
+#      password: ${CONFIG_PASSWORD:password}
+#      fail-fast: true
+#      discovery:
+#        enabled: true
 
 eureka:
   client:

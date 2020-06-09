@@ -22,6 +22,7 @@
         <module>gateway</module>
         <module>users</module>
         <module>config</module>
+        <module>ui</module>
     </modules>
 
     <dependencyManagement>
