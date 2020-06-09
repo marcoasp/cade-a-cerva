@@ -10,6 +10,8 @@ services:
             EUREKA_USER: "${EUREKA_USER}"
             EUREKA_PASSWORD: "${EUREKA_PASSWORD}"
     config:
+        ports:
+            - "8888:8080"
         depends_on:
             - registry
         image: omarcovelho/config
@@ -70,12 +72,24 @@ services:
             - "80:8080"
         networks:
             - vpc
+    ui:
+        depends_on:
+          - gateway
+        image: omarcovelho/ui
+        environment:
+          EUREKA_ADDRESS: "${EUREKA_ADDRESS}"
+          CONFIG_USER: "${CONFIG_USER}"
+          CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
+        networks:
+          - vpc
     mongo:
         image: "mongo"
         volumes:
             - "storedb:/data/db"
         networks:
             - vpc
+        ports:
+            - "27017:27017"
     mongo-express:
         image: mongo-express
         ports:

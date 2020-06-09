@@ -6,3 +6,5 @@ docker push "$DOCKER_USERNAME/registry"
 docker push "$DOCKER_USERNAME/sales"
 docker push "$DOCKER_USERNAME/store"
 docker push "$DOCKER_USERNAME/users"
+docker push "$DOCKER_USERNAME/ui"
+
