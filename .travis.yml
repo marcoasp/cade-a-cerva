@@ -1,6 +1,8 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
+node_js:
+  - 14.4.0
 
 env:
   global:
@@ -23,8 +25,8 @@ install:
   - npm --version
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
-  - mvn spring-boot:build-image
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
+- mvn spring-boot:build-image
 
 notifications:
   email:
