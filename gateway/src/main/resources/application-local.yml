@@ -17,21 +17,12 @@ zuul:
     discovery.locator.enabled: true
     store:
       path: /api/store/**
-      stripPrefix: true
+      stripPrefix: false
       serviceId: store
     sales:
       path: /api/sale/**
-      stripPrefix: true
+      stripPrefix: false
       serviceId: sale
     ui:
-      path: /ui/**
-      stripPrefix: true
+      path: /**
       serviceId: ui
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-logging.level.root: TRACE

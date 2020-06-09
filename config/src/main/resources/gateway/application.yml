@@ -15,17 +15,14 @@ eureka:
 zuul:
   routes:
     discovery.locator.enabled: true
-    routes:
-      store:
-        prefix: /api
-        path: /store/**
-        stripPrefix: true
-      sales:
-        prefix: /api
-        path: /api/sale/**
-        stripPrefix: true
-      ui:
-        path: /**
-        stripPrefix: true
-
-logging.level.root: DEBUG
+    store:
+      path: /api/store/**
+      stripPrefix: false
+      serviceId: store
+    sales:
+      path: /api/sale/**
+      stripPrefix: false
+      serviceId: sale
+    ui:
+      path: /**
+      serviceId: ui
