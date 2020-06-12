@@ -1,6 +1,3 @@
-server:
-  port: 8888
-
 spring:
   security:
     oauth2:
@@ -18,10 +15,14 @@ eureka:
 zuul:
   routes:
     discovery.locator.enabled: true
-    routes:
-      store:
-        stripPrefix: true
-        path: /store/**
-      sales:
-        stripPrefix: true
-        path: /sale/**
+    store:
+      path: /api/store/**
+      stripPrefix: false
+      serviceId: store
+    sales:
+      path: /api/sale/**
+      stripPrefix: false
+      serviceId: sale
+    ui:
+      path: /**
+      serviceId: ui

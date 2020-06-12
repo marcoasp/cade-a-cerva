@@ -5,7 +5,8 @@ spring:
         registration:
           google:
             client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
-            client-secret: '{cipher}73282704539feadd5895d7ea1d027aa0cfc600b75e12c727383f6038ba4e69835a82883bc316e3691ef851dfb24d8aef'
+            client-secret: '{cipher}33971f9bf99350db2f4f58e2869b627598cff7b2f1dd47afb98dc1b0814a0bbabf8840776e2e7a138dc5503b63858d9a'
+
 eureka:
   client:
     registerWithEureka: true
@@ -13,16 +14,14 @@ eureka:
 zuul:
   routes:
     discovery.locator.enabled: true
-    routes:
-      store:
-        sensitiveHeaders: Cookie,Set-Cookie
-        path: /store/**
-        stripPrefix: true
-      sales:
-        sensitiveHeaders: Cookie,Set-Cookie
-        path: /sale/**
-        stripPrefix: true
-      user:
-        sensitiveHeaders: Cookie,Set-Cookie
-        path: /user/**
-        stripPrefix: true
+    store:
+      path: /api/store/**
+      stripPrefix: false
+      serviceId: store
+    sales:
+      path: /api/sale/**
+      stripPrefix: false
+      serviceId: sale
+    ui:
+      path: /**
+      serviceId: ui
