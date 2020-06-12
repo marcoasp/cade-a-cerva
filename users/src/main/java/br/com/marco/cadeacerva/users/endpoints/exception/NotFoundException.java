@@ -1,4 +1,4 @@
-package br.com.maro.cadeacerva.users.endpoints.exception;
+package br.com.marco.cadeacerva.users.endpoints.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

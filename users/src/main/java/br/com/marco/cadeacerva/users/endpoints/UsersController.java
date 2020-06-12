@@ -1,12 +1,10 @@
-package br.com.maro.cadeacerva.users.endpoints;
+package br.com.marco.cadeacerva.users.endpoints;
 
-import br.com.maro.cadeacerva.users.domain.User;
-import br.com.maro.cadeacerva.users.endpoints.dto.UserDTO;
-import br.com.maro.cadeacerva.users.domain.UsersRepository;
-import br.com.maro.cadeacerva.users.endpoints.exception.NotFoundException;
+import br.com.marco.cadeacerva.users.domain.User;
+import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
+import br.com.marco.cadeacerva.users.domain.UsersRepository;
+import br.com.marco.cadeacerva.users.endpoints.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,11 +20,6 @@ public class UsersController {
                 usersRepository.save(new User(userDto.getEmail()))
         );
         return new UserDTO(user);
-    }
-
-    @GetMapping("/oidc-principal")
-    public JwtAuthenticationToken getOidcUserPrincipal(@AuthenticationPrincipal JwtAuthenticationToken principal) {
-        return principal;
     }
 
     @PutMapping("/id")

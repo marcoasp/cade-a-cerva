@@ -1,8 +1,7 @@
-package br.com.maro.cadeacerva.users.domain;
+package br.com.marco.cadeacerva.users.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter

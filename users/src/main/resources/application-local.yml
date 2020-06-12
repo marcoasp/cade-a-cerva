@@ -9,9 +9,3 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://accounts.google.com
-
-debug: true
-logging.level:
-  org:
-    springframework:
-      security: TRACE

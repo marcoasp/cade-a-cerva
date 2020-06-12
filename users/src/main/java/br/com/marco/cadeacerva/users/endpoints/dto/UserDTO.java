@@ -1,8 +1,7 @@
-package br.com.maro.cadeacerva.users.endpoints.dto;
+package br.com.marco.cadeacerva.users.endpoints.dto;
 
-import br.com.maro.cadeacerva.users.domain.User;
+import br.com.marco.cadeacerva.users.domain.User;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
