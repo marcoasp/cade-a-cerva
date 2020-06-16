@@ -1,4 +1,4 @@
-package br.com.marco.cadeacerva.users.infra.annotations;
+package br.com.marco.cadeacerva.users.utils.annotation;
 
 
 import org.springframework.test.context.ActiveProfiles;

@@ -5,6 +5,10 @@ import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
 import br.com.marco.cadeacerva.users.endpoints.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,11 +26,11 @@ public class UsersController {
         return new UserDTO(user);
     }
 
-    @PutMapping("/id")
-    public UserDTO update(@PathVariable("id") String id, @RequestBody UserDTO userDTO) {
-        User user = usersRepository.findById(id)
-        .map((u) -> u.update(userDTO.getLocation()))
-        .orElseThrow(NotFoundException::new);
+    @PutMapping("/me")
+    public UserDTO update(@AuthenticationPrincipal Jwt auth, @RequestBody UserDTO userDTO) {
+        User user = usersRepository.findByEmail(auth.getClaimAsString("email"))
+                .map((foundUser) -> usersRepository.save(foundUser.update(userDTO.getLocation())))
+                .orElseThrow(NotFoundException::new);
         return new UserDTO(user);
     }
 }
