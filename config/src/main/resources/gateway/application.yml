@@ -11,7 +11,6 @@ eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
-
 zuul:
   routes:
     discovery.locator.enabled: true

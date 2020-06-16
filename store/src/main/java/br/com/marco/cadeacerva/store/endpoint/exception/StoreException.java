@@ -1,4 +1,4 @@
 package br.com.marco.cadeacerva.store.endpoint.exception;
 
-public class StoreException extends RuntimeException {
+public abstract class StoreException extends RuntimeException {
 }
