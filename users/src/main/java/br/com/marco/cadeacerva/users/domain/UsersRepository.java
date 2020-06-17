@@ -1,4 +1,4 @@
-package br.com.maro.cadeacerva.users.domain;
+package br.com.marco.cadeacerva.users.domain;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

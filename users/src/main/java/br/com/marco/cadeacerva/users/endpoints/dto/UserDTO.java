@@ -1,8 +1,7 @@
-package br.com.maro.cadeacerva.users.endpoints.dto;
+package br.com.marco.cadeacerva.users.endpoints.dto;
 
-import br.com.maro.cadeacerva.users.domain.User;
+import br.com.marco.cadeacerva.users.domain.User;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -10,11 +9,13 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class UserDTO {
 
-    public final String id;
-    public final String email;
+    private final String id;
+    private final String email;
+    private final double[] location;
 
     public UserDTO(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
+        this.location = user.getLocation();
     }
 }
