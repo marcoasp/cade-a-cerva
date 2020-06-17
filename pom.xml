@@ -66,6 +66,7 @@
         <sonar.language>java</sonar.language>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/tests-report/target/site/jacoco-aggregate/</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.exclusions>**/*Config.*,**/*Application.*</sonar.exclusions>
+        <sonar.projectName>Cade a Cerva</sonar.projectName>
     </properties>
     <build>
         <plugins>
@@ -90,7 +91,7 @@
                 <configuration>
                     <append>true</append>
                     <excludes>
-                        **/*Config.*,**/*Application.*  
+                        **/*Config.*,**/*Application.*
                     </excludes>
                 </configuration>
                 <executions>
