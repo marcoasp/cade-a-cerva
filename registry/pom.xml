@@ -7,12 +7,13 @@
 		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<groupId>br.com.marco.cadeacerva</groupId>
 	<artifactId>registry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>registry</name>
-	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../tests-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+	</properties>
 
 	<dependencies>
 		<dependency>
