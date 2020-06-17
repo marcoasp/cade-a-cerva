@@ -11,9 +11,6 @@
     <artifactId>tests-report</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../tests-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>br.com.marco.cadeacerva</groupId>
