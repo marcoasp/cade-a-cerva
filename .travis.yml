@@ -21,7 +21,7 @@ addons:
 script:
 - mvn clean install
 - mvn sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
-- mvn spring-boot:build-image
+- mvn spring-boot:build-image -pl store,sales,registry,gateway,users,config,ui
 
 notifications:
   email:
