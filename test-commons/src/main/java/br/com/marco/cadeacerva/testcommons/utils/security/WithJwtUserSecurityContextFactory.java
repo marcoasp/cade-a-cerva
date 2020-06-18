@@ -1,6 +1,6 @@
-package br.com.marco.cadeacerva.users.utils.security;
+package br.com.marco.cadeacerva.testcommons.utils.security;
 
-import br.com.marco.cadeacerva.users.utils.annotation.WithJwtUser;
+import br.com.marco.cadeacerva.testcommons.utils.annotation.WithJwtUser;
 import com.google.common.collect.ImmutableMap;
 import org.assertj.core.util.Maps;
 import org.springframework.security.core.Authentication;
@@ -11,11 +11,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Collections;
 
 public class WithJwtUserSecurityContextFactory implements WithSecurityContextFactory<WithJwtUser> {
 

@@ -1,6 +1,6 @@
-package br.com.marco.cadeacerva.users.utils.annotation;
+package br.com.marco.cadeacerva.testcommons.utils.annotation;
 
-import br.com.marco.cadeacerva.users.utils.security.WithJwtUserSecurityContextFactory;
+import br.com.marco.cadeacerva.testcommons.utils.security.WithJwtUserSecurityContextFactory;
 import org.springframework.security.test.context.support.WithSecurityContext;
 
 import java.lang.annotation.Retention;

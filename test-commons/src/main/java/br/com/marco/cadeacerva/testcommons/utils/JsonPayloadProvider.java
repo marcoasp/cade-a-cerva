@@ -1,4 +1,4 @@
-package br.com.marco.cadeacerva.users.utils;
+package br.com.marco.cadeacerva.testcommons.utils;
 
 import org.springframework.core.io.ClassPathResource;
 
