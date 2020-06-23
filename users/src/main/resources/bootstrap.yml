@@ -34,7 +34,11 @@ spring:
       discovery.enabled: false
     discovery:
       enabled: false
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
 eureka:
   client:
     enabled: false
