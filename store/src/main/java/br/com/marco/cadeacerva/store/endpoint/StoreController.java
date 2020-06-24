@@ -5,12 +5,10 @@ import br.com.marco.cadeacerva.store.endpoint.dto.StoreDTO;
 import br.com.marco.cadeacerva.store.domain.StoreRepository;
 import br.com.marco.cadeacerva.store.endpoint.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/store")
@@ -20,8 +18,8 @@ public class StoreController {
     private final StoreRepository storeRepository;
 
     @GetMapping
-    public List<StoreDTO> listAll() {
-        return storeRepository.findAll().stream().map(StoreDTO::new).collect(toList());
+    public Page<StoreDTO> listAll(Pageable pageable) {
+        return storeRepository.findAll(pageable).map(StoreDTO::new);
     }
 
     @PostMapping
@@ -38,7 +36,8 @@ public class StoreController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") String id) {
-        storeRepository.deleteById(id);
+        Store store = storeRepository.findById(id).orElseThrow(NotFoundException::new);
+        storeRepository.delete(store);
     }
 
     @PutMapping("/{id}")
