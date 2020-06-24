@@ -1,8 +1,6 @@
-package br.com.marco.cadeacerva.users.infra.config;
+package br.com.marco.cadeacerva.testcommons.utils.security;
 
-import br.com.marco.cadeacerva.users.infra.MockedCsrfRepository;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;

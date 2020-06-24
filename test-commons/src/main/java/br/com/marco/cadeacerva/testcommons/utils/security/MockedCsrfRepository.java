@@ -1,9 +1,8 @@
-package br.com.marco.cadeacerva.users.infra;
+package br.com.marco.cadeacerva.testcommons.utils.security;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.DefaultCsrfToken;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

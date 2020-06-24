@@ -1,10 +1,7 @@
-package br.com.marco.cadeacerva.users.infra;
+package br.com.marco.cadeacerva.testcommons.utils.annotation;
 
-import br.com.marco.cadeacerva.testcommons.utils.annotation.IntegrationTest;
-import br.com.marco.cadeacerva.users.infra.config.DummyCsrfSecurity;
+import br.com.marco.cadeacerva.testcommons.utils.security.DummyCsrfSecurity;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
