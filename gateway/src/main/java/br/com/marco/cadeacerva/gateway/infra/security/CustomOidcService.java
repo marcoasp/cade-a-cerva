@@ -19,12 +19,7 @@ public class CustomOidcService extends OidcUserService {
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         OidcUser oidcUser = super.loadUser(userRequest);
-
-        try {
-            usersClient.saveUser(oidcUser.getEmail(), new UserDTO(oidcUser.getEmail()));
-            return oidcUser;
-        } catch (Exception ex) {
-            throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
-        }
+        usersClient.saveUser(oidcUser.getEmail(), new UserDTO(oidcUser.getEmail()));
+        return oidcUser;
     }
 }

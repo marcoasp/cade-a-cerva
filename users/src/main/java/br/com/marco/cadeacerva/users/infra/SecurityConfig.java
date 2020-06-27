@@ -1,20 +1,18 @@
-package br.com.marco.cadeacerva.testcommons.utils.security;
+package br.com.marco.cadeacerva.users.infra;
 
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 
-@TestConfiguration
-public class DummyCsrfSecurity extends WebSecurityConfigurerAdapter {
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().csrfTokenRepository(new MockedCsrfRepository())
-            .and()
+            .csrf().disable()
             .authorizeRequests(authorize -> authorize
-                    .anyRequest().authenticated()
+                .anyRequest().authenticated()
             )
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }

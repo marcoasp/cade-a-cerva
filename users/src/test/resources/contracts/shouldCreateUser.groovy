@@ -6,7 +6,6 @@ Contract.make {
         urlPath('/user/existing-user@email.com')
         headers {
             contentType(applicationJson())
-            header 'X-CSRF-TOKEN': 'test-token'
         }
         body '''{ "email": "existing-user@email.com" }'''
     }

@@ -67,7 +67,7 @@ class StoreControllerTest {
         mockMvc.perform(post("/store")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonPayloadProvider.from(this.getClass(), "shouldSaveAStore"))
-                .with(csrf())
+
         )
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.id", notNullValue()))
@@ -100,14 +100,14 @@ class StoreControllerTest {
     @Test
     void shouldDeleteStore() throws Exception {
         when(repository.findById("random-string")).thenReturn(Optional.of(new Store("store")));
-        mockMvc.perform(delete("/store/random-string").with(csrf()))
+        mockMvc.perform(delete("/store/random-string"))
                 .andExpect(status().isNoContent());
         verify(repository).delete(any(Store.class));
     }
 
     @Test
     void shouldReturn404WhenDeleteNotExistentStore() throws Exception {
-        mockMvc.perform(delete("/store/random-string").with(csrf()))
+        mockMvc.perform(delete("/store/random-string"))
                 .andExpect(status().isNotFound());
         verify(repository, never()).delete(any(Store.class));
     }
@@ -122,7 +122,7 @@ class StoreControllerTest {
         mockMvc.perform(put("/store/random-string")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonPayloadProvider.from(this.getClass(), "shouldUpdateStoreName"))
-                .with(csrf())
+
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo("store-modified")));
@@ -138,7 +138,7 @@ class StoreControllerTest {
         mockMvc.perform(put("/store/random-string")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{}")
-                .with(csrf())
+
         )
         .andExpect(status().isNotFound());
 
