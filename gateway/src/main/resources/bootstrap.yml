@@ -14,3 +14,33 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl.defaultZone: ${EUREKA_ADDRESS:http://eureka:password@localhost:8761}/eureka
+
+---
+spring:
+  profiles: "local"
+  cloud:
+    config:
+      enabled: false
+      discovery.enabled: false
+    discovery:
+      enabled: false
+
+---
+spring:
+  profiles: "integration-tests"
+  cloud:
+    config:
+      enabled: false
+      discovery.enabled: false
+    discovery:
+      enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 131410492823-j0tfr05n49cqh3hrftvlglcehh7eskcg.apps.googleusercontent.com
+            client-secret: bi7TH03CVHR4KWZmkvx2tqd-
+eureka:
+  client:
+    enabled: false

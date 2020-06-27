@@ -14,17 +14,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CustomOidcService extends OidcUserService {
 
-    private final UsersClient usersClient;
+    private final UsersService usersService;
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        OidcUser oidcUser = super.loadUser(userRequest);
-
-        try {
-            usersClient.saveUser(oidcUser.getEmail(), new UserDTO(oidcUser.getEmail()));
-            return oidcUser;
-        } catch (Exception ex) {
-            throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
-        }
+        return usersService.resolveUser(super.loadUser(userRequest));
     }
 }

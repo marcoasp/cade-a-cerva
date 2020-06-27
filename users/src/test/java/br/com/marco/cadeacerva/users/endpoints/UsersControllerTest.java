@@ -46,7 +46,6 @@ public class UsersControllerTest {
         when(usersRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         mockMvc.perform(
                 put("/user/{email}", email)
-                .with(csrf())
                 .content(JsonPayloadProvider.from(this.getClass(), "shouldCreateUnexistentUser"))
                 .contentType(MediaType.APPLICATION_JSON)
         )
@@ -63,7 +62,6 @@ public class UsersControllerTest {
         when(usersRepository.findByEmail(email)).thenReturn(Optional.of(new User(email)));
         mockMvc.perform(
                 put("/user/{email}", email)
-                        .with(csrf())
                         .content(JsonPayloadProvider.from(this.getClass(), "shouldCreateUnexistentUser"))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -83,7 +81,6 @@ public class UsersControllerTest {
         when(usersRepository.save(currentUser)).then(i -> i.getArgument(0, User.class));
         mockMvc.perform(
                 put("/user/me", email)
-                        .with(csrf())
                         .content(JsonPayloadProvider.from(this.getClass(), "shouldUpdateUserLocation"))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -104,7 +101,6 @@ public class UsersControllerTest {
                 put("/user/me", email)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}")
-                        .with(csrf())
         )
                 .andExpect(status().isNotFound())
         ;
