@@ -3,7 +3,8 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
     request {
         method 'PUT'
-        urlPath('/user/existing-user@email.com')
+
+        urlPath $(consumer(regex('^/user/[a-zA-Z0-9._%+-]+(@|%40)[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}')), producer('/user/existing-user@email.com'))
         headers {
             contentType(applicationJson())
         }
