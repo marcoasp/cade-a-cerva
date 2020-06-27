@@ -1,4 +1,5 @@
 #!/bin/bash
+mvn spring-boot:build-image -pl store,sales,registry,gateway,users,config,ui
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker push "$DOCKER_USERNAME/config"
 docker push "$DOCKER_USERNAME/gateway"

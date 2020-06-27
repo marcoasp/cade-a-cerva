@@ -22,7 +22,6 @@ script:
 - mvn spring-cloud-contract:generateStubs -pl users
 - mvn clean verify
 - mvn sonar:sonar -Dsonar.projectKey=marcoasp_cade-a-cerva
-- mvn spring-boot:build-image -pl store,sales,registry,gateway,users,config,ui
 
 notifications:
   email:
