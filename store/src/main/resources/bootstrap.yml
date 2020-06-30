@@ -1,3 +1,4 @@
+server.servlet.context-path: /api
 spring:
   application:
     name: store
@@ -16,6 +17,21 @@ eureka:
     serviceUrl.defaultZone: ${EUREKA_ADDRESS:http://eureka:password@localhost:8761}/eureka
 
 ---
+spring:
+  profiles: "local"
+  cloud:
+    config:
+      enabled: false
+      discovery.enabled: false
+    discovery:
+      enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+---
+server.servlet.context-path: /
 spring:
   profiles: "integration-tests"
   cloud:

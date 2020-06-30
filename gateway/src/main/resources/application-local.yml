@@ -11,17 +11,22 @@ users:
   ribbon:
     listOfServers: localhost:8083
 
+logging.level.root: DEBUG
+
 zuul:
   routes:
     discovery.locator.enabled: true
     store:
       path: /api/store/**
       stripPrefix: false
-      serviceId: store
+      url: http://localhost:8081
     sales:
       path: /api/sale/**
       stripPrefix: false
-      serviceId: sale
+      url: http://localhost:8082
+    actuator:
+      path: /actuator/**
+      url: forward:/actuator
     ui:
       path: /**
-      serviceId: ui
+      url: http://localhost:8085

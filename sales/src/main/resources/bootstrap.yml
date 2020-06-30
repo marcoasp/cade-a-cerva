@@ -1,3 +1,4 @@
+server.servlet.context-path: /api
 spring:
   application:
     name: sales
@@ -16,6 +17,7 @@ eureka:
     serviceUrl.defaultZone: ${EUREKA_ADDRESS:http://eureka:password@localhost:8761}/eureka
 
 ---
+server.servlet.context-path: /
 spring:
   profiles: "integration-tests"
   cloud:
