@@ -29,7 +29,7 @@ public class UsersController {
     @PutMapping("/me")
     public UserDTO update(@AuthenticationPrincipal Jwt auth, @RequestBody UserDTO userDTO) {
         User user = usersRepository.findByEmail(auth.getClaimAsString("email"))
-                .map((foundUser) -> usersRepository.save(foundUser.update(userDTO.getLocation())))
+                .map((foundUser) -> usersRepository.save(foundUser.update(userDTO.getLocation(), userDTO.getArea())))
                 .orElseThrow(NotFoundException::new);
         return new UserDTO(user);
     }

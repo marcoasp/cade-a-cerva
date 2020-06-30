@@ -1,5 +1,30 @@
 version: "3.4"
 services:
+    rabbit:
+        image: "rabbitmq:management-alpine"
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        networks:
+            - vpc
+    mongo:
+        image: "mongo"
+        volumes:
+            - "storedb:/data/db"
+        ports:
+            - "27017:27017"
+        networks:
+            - vpc
+    mongo-express:
+        image: mongo-express
+        ports:
+            - 8090:8081
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: password
+        networks:
+            - vpc
     registry:
         image: omarcovelho/registry
         ports:
@@ -28,8 +53,6 @@ services:
             SPRING_PROFILES_ACTIVE: native
         networks:
             - vpc
-        ports:
-          - "8888:8080"
         healthcheck:
             test: ["CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health 2>&1 | grep UP || exit 1"]
             interval: 10s
@@ -120,26 +143,6 @@ services:
           CONFIG_PASSWORD: "${CONFIG_PASSWORD}"
         networks:
           - vpc
-    mongo:
-        image: "mongo"
-        volumes:
-            - "storedb:/data/db"
-        ports:
-           - "27017:27017"
-        networks:
-            - vpc
-        ports:
-            - "27017:27017"
-    mongo-express:
-        image: mongo-express
-        ports:
-            - 8090:8081
-        environment:
-            ME_CONFIG_MONGODB_SERVER: mongo
-            ME_CONFIG_MONGODB_ADMINUSERNAME: root
-            ME_CONFIG_MONGODB_ADMINPASSWORD: password
-        networks:
-            - vpc
 volumes:
     storedb:
 

@@ -87,6 +87,7 @@ public class UsersControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.email", equalTo(email)))
         .andExpect(jsonPath("$.location", hasItems(10.0, 20.5)))
+        .andExpect(jsonPath("$.area", equalTo(3.5)))
         ;
 
         verify(usersRepository).save(any());
