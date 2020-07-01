@@ -45,7 +45,6 @@ public class SaleRepositoryTest {
             new Sale("address4", Collections.emptyList(), new double[]{-23.2219481,-45.8526897}),
             new Sale("address5", Collections.emptyList(), new double[]{-90.0, -90.0})
         ).stream().forEach(repository::save);
-
     }
 
     @Test
