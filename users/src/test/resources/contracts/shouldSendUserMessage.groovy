@@ -6,7 +6,7 @@ Contract.make {
         triggeredBy("sendUserMessageTriggered()")
     }
     outputMessage {
-        sentTo"users-out-0"
+        sentTo"users"
         body '''{ "email": "existing-user@email.com", "location": [10.0, 20.5], "area": 3.5 }'''
     }
 }
