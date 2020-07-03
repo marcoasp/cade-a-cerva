@@ -21,6 +21,8 @@ spring:
   cloud:
     stream:
       source: users
+      bindings:
+        users-out-0.destination: users
     config:
       enabled: false
       discovery.enabled: false
@@ -32,8 +34,9 @@ server.servlet.context-path: /
 spring:
   profiles: "integration-tests"
   cloud:
-    stream:
-      source: users
+    source: users
+    bindings:
+      users-out-0.destination: users
     config:
       enabled: false
       discovery.enabled: false
