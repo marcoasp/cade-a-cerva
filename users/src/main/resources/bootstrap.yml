@@ -19,6 +19,8 @@ eureka:
 spring:
   profiles: "local"
   cloud:
+    stream:
+      source: users
     config:
       enabled: false
       discovery.enabled: false
@@ -30,6 +32,8 @@ server.servlet.context-path: /
 spring:
   profiles: "integration-tests"
   cloud:
+    stream:
+      source: users
     config:
       enabled: false
       discovery.enabled: false
@@ -40,6 +44,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://accounts.google.com
+
 eureka:
   client:
     enabled: false

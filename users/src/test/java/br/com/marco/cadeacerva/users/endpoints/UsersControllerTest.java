@@ -4,6 +4,7 @@ import br.com.marco.cadeacerva.testcommons.utils.JsonPayloadProvider;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.IntegrationTest;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.WithJwtUser;
 import br.com.marco.cadeacerva.users.domain.User;
+import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,9 @@ public class UsersControllerTest {
 
     @MockBean
     UsersRepository usersRepository;
+
+    @MockBean
+    UserProducer userProducer;
 
     @Test
     public void shouldCreateUnexistentUser() throws Exception {
@@ -91,6 +95,7 @@ public class UsersControllerTest {
         ;
 
         verify(usersRepository).save(any());
+        verify(userProducer).produceUserMessage(any(User.class));
     }
 
     @Test

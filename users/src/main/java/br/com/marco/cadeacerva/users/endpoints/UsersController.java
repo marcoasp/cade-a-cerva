@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.users.endpoints;
 
 import br.com.marco.cadeacerva.users.domain.User;
+import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
 import br.com.marco.cadeacerva.users.endpoints.exception.NotFoundException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsersController {
 
     private final UsersRepository usersRepository;
+    private final UserProducer userProducer;
 
     @PutMapping("/{email}")
     public UserDTO save(@PathVariable("email") String email, @RequestBody UserDTO userDto) {
@@ -31,6 +33,7 @@ public class UsersController {
         User user = usersRepository.findByEmail(auth.getClaimAsString("email"))
                 .map((foundUser) -> usersRepository.save(foundUser.update(userDTO.getLocation(), userDTO.getArea())))
                 .orElseThrow(NotFoundException::new);
+        userProducer.produceUserMessage(user);
         return new UserDTO(user);
     }
 }
