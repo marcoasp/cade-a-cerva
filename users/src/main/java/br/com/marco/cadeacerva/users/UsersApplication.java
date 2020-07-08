@@ -18,9 +18,4 @@ public class UsersApplication {
 		SpringApplication.run(UsersApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner run() {
-		return (args) -> userProducer.produceUserMessage(new User("random-string", "existing-user@email.com", new double[]{10.0, 20.5}, 3.5));
-	}
-
 }

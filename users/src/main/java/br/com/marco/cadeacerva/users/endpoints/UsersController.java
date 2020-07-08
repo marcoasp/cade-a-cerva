@@ -1,5 +1,6 @@
 package br.com.marco.cadeacerva.users.endpoints;
 
+import br.com.marco.cadeacerva.users.domain.Interest;
 import br.com.marco.cadeacerva.users.domain.User;
 import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
@@ -11,6 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @RestController
 @RequestMapping("/user")
@@ -31,7 +36,11 @@ public class UsersController {
     @PutMapping("/me")
     public UserDTO update(@AuthenticationPrincipal Jwt auth, @RequestBody UserDTO userDTO) {
         User user = usersRepository.findByEmail(auth.getClaimAsString("email"))
-                .map((foundUser) -> usersRepository.save(foundUser.update(userDTO.getLocation(), userDTO.getArea())))
+                .map((foundUser) -> usersRepository.save(foundUser.update(
+                        userDTO.getLocation(),
+                        userDTO.getArea(),
+                        userDTO.getInterests().stream().map(ui -> new Interest(ui.getTags(), ui.getPricePerLiter())).collect(toList()))
+                ))
                 .orElseThrow(NotFoundException::new);
         userProducer.produceUserMessage(user);
         return new UserDTO(user);
