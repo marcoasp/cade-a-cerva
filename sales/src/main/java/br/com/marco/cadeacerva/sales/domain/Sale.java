@@ -19,12 +19,15 @@ public class Sale {
     private String id;
     private final String address;
     private final List<String> tags;
+    private final Double pricePerLiter;
+
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private final double[] location;
 
-    public Sale(final String address, final List<String> tags, final double[] location) {
+    public Sale(final String address, final List<String> tags, final Double pricePerLiter, final double[] location) {
         this.address = address;
         this.tags = new ArrayList<>(tags);
+        this.pricePerLiter = pricePerLiter;
         this.location = location;
     }
 }

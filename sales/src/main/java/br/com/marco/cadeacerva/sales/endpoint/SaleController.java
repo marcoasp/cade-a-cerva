@@ -22,7 +22,7 @@ public class SaleController {
 
     @PostMapping
     public SaleDTO create(@RequestBody SaleDTO newSale) {
-        return new SaleDTO(saleRepository.save(new Sale(newSale.getAddress(), newSale.getTags(), newSale.getLocation())));
+        return new SaleDTO(saleRepository.save(new Sale(newSale.getAddress(), newSale.getTags(), newSale.getPricePerLiter(), newSale.getLocation())));
     }
 
     @GetMapping

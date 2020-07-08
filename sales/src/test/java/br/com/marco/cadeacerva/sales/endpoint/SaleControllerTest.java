@@ -50,6 +50,8 @@ public class SaleControllerTest {
         .andExpect(jsonPath("$.id", notNullValue()))
         .andExpect(jsonPath("$.address", equalTo("address")))
         .andExpect(jsonPath("$.tags",  hasItems("tag1", "tag2")))
-        .andExpect(jsonPath("$.location", hasItems(10.0, 20.5)));
+        .andExpect(jsonPath("$.location", hasItems(10.0, 20.5)))
+        .andExpect(jsonPath("$.pricePerLiter", equalTo(50.0)))
+        ;
     }
 }

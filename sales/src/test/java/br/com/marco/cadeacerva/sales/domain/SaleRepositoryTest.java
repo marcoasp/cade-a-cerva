@@ -39,11 +39,11 @@ public class SaleRepositoryTest {
     @Before
     public void setUp() {
         Arrays.asList(
-            new Sale("address1", Collections.emptyList(), new double[]{-23.2192762,-45.8543312}),
-            new Sale("address2", Collections.emptyList(), new double[]{-23.2192762,-45.8543312}),
-            new Sale("address3", Collections.emptyList(), new double[]{-23.2219481,-45.8526897}),
-            new Sale("address4", Collections.emptyList(), new double[]{-23.2219481,-45.8526897}),
-            new Sale("address5", Collections.emptyList(), new double[]{-90.0, -90.0})
+            new Sale("address1", Collections.emptyList(), 10.0, new double[]{-23.2192762,-45.8543312}),
+            new Sale("address2", Collections.emptyList(), 10.0, new double[]{-23.2192762,-45.8543312}),
+            new Sale("address3", Collections.emptyList(), 10.0, new double[]{-23.2219481,-45.8526897}),
+            new Sale("address4", Collections.emptyList(), 10.0, new double[]{-23.2219481,-45.8526897}),
+            new Sale("address5", Collections.emptyList(), 10.0, new double[]{-90.0, -90.0})
         ).stream().forEach(repository::save);
     }
 

@@ -1,5 +1,6 @@
 {
   "address": "address",
   "tags": ["tag1", "tag2"],
-  "location": [10.0, 20.5]
+  "location": [10.0, 20.5],
+  "pricePerLiter": 50.0
 }
