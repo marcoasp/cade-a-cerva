@@ -1,7 +1,8 @@
 package br.com.marco.cadeacerva.sales.domain;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface SaleCriteriaRepository {
-    List<Sale> findBy(SaleSearchCriteriaWrapper criteria);
+    Page<Sale> findBy(SaleSearchCriteriaWrapper criteria, Pageable pageable);
 }

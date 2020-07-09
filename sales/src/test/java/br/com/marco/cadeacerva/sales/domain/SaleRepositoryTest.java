@@ -52,7 +52,8 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldReturnPagedNearResults() {
-        Page<Sale> page = repository.findByLocationNear(new Point(-23.2023046,-45.8639857), new Distance(10, Metrics.KILOMETERS), PageRequest.of(0, 2));
+        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).build());
+        Page<Sale> page = repository.findBy(criteria, PageRequest.of(0, 2));
 
         assertThat(page.getSize(), equalTo(2));
         assertThat(page.getTotalElements(), equalTo(4L));
@@ -62,19 +63,29 @@ public class SaleRepositoryTest {
     @Test
     public void shouldSearchByTagOnly() {
         SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).tags(Arrays.asList("tag1")).build());
-        List<Sale> sales = repository.findBy(criteria);
+        Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
 
-        assertThat(sales, hasSize(1));
-        assertThat(sales.get(0).getTags(), hasItems("tag1"));
+        assertThat(sales.getTotalElements(), equalTo(1L));
+        assertThat(sales.getContent().get(0).getTags(), hasItems("tag1"));
     }
 
     @Test
     public void shouldSearchByPriceOnly() {
         SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build());
-        List<Sale> sales = repository.findBy(criteria);
+        Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
 
-        assertThat(sales, hasSize(2));
-        assertThat(sales.get(0).getPricePerLiter(), equalTo(5.0));
-        assertThat(sales.get(1).getPricePerLiter(), equalTo(10.0));
+        assertThat(sales.getTotalElements(), equalTo(2L));
+        assertThat(sales.getContent().get(0).getPricePerLiter(), equalTo(5.0));
+        assertThat(sales.getContent().get(1).getPricePerLiter(), equalTo(10.0));
+    }
+
+    @Test
+    public void shouldSearchByTagAndPrice() {
+        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(
+                SearchCriteria.builder().tags(Arrays.asList("tag1")).location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build());
+        Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
+
+        assertThat(sales.getTotalElements(), equalTo(1L));
+        assertThat(sales.getContent().get(0).getPricePerLiter(), equalTo(5.0));
     }
 }
