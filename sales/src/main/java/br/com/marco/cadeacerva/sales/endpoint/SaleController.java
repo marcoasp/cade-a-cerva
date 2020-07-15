@@ -2,6 +2,7 @@ package br.com.marco.cadeacerva.sales.endpoint;
 
 import br.com.marco.cadeacerva.sales.domain.Sale;
 import br.com.marco.cadeacerva.sales.domain.SaleRepository;
+import br.com.marco.cadeacerva.sales.domain.SaleSearchCriteriaWrapper;
 import br.com.marco.cadeacerva.sales.endpoint.dto.SaleDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,12 +27,8 @@ public class SaleController {
     }
 
     @GetMapping
-    public Page<SaleDTO> getSales(@RequestParam("location") double[] location, @RequestParam("distance") double distance, Pageable pageable) {
-        Page<Sale> sales = saleRepository.findByLocationNear(
-            new Point(location[0], location[1]),
-            new Distance(distance, Metrics.KILOMETERS),
-            pageable
-        );
+    public Page<SaleDTO> searchSales(@RequestParam("search") SaleSearchCriteriaWrapper search, Pageable pageable) {
+        Page<Sale> sales = saleRepository.findBy(search, pageable);
         return sales.map(SaleDTO::new);
     }
 }

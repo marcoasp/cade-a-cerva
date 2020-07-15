@@ -52,7 +52,7 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldReturnPagedNearResults() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).build());
+        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(Arrays.asList(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).build()));
         Page<Sale> page = repository.findBy(criteria, PageRequest.of(0, 2));
 
         assertThat(page.getSize(), equalTo(2));
@@ -62,7 +62,7 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldSearchByTagOnly() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).tags(Arrays.asList("tag1")).build());
+        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(Arrays.asList(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).tags(Arrays.asList("tag1")).build()));
         Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
 
         assertThat(sales.getTotalElements(), equalTo(1L));
@@ -71,7 +71,7 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldSearchByPriceOnly() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build());
+        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(Arrays.asList(SearchCriteria.builder().location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build()));
         Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
 
         assertThat(sales.getTotalElements(), equalTo(2L));
@@ -82,7 +82,7 @@ public class SaleRepositoryTest {
     @Test
     public void shouldSearchByTagAndPrice() {
         SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(
-                SearchCriteria.builder().tags(Arrays.asList("tag1")).location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build());
+                Arrays.asList(SearchCriteria.builder().tags(Arrays.asList("tag1")).location(new double[]{-23.2023046,-45.8639857}).distance(10).pricePerLiter(10.0).build()));
         Page<Sale> sales = repository.findBy(criteria, PageRequest.of(0, 2));
 
         assertThat(sales.getTotalElements(), equalTo(1L));

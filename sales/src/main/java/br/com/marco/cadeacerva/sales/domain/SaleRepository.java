@@ -7,6 +7,4 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface SaleRepository extends MongoRepository<Sale, String>, SaleCriteriaRepository {
-
-    Page<Sale> findByLocationNear(Point point, Distance distance, Pageable pageable);
 }

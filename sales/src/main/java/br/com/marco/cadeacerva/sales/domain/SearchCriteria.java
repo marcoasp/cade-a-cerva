@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.sales.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Builder
+@Getter
 public class SearchCriteria {
 
     private final double[] location;
