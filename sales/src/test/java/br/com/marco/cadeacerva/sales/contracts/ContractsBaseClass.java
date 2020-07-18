@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +38,7 @@ public class ContractsBaseClass {
     @Before
     public void setUp() {
         RestAssuredMockMvc.webAppContextSetup(this.context);
-        when(saleRepository.findBy(any(SaleSearchCriteriaWrapper.class), any(Pageable.class)))
+        when(saleRepository.findBy(any(SaleSearchCriteriaWrapper.class), eq(PageRequest.of(0, 1))))
                 .thenReturn(new PageImpl<>(
                         Arrays.asList(
                                 new Sale("address", Arrays.asList("tag1", "tag2"), 10.0, new double[]{10.0, 20.0})

@@ -1,0 +1,3 @@
+sales:
+  ribbon:
+    listOfServers: localhost:8090
