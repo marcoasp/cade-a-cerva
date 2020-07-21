@@ -13,7 +13,8 @@ Contract.make {
             { 
                 "email": "existing-user@email.com", 
                 "location": [10.0, 20.5], 
-                "area": 3.5, "interests": [
+                "area": 3.5, 
+                "interests": [
                     {
                       "tags": ["beer1", "beer2"],
                       "pricePerLiter": 5.5
@@ -27,7 +28,8 @@ Contract.make {
             { 
                 "email": "existing-user@email.com", 
                 "location": [10.0, 20.5], 
-                "area": 3.5, "interests": [
+                "area": 3.5, 
+                "interests": [
                     {
                       "tags": ["beer1", "beer2"],
                       "pricePerLiter": 5.5
