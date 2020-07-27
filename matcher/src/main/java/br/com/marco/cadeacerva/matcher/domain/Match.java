@@ -1,7 +1,12 @@
 package br.com.marco.cadeacerva.matcher.domain;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
 public class Match {
-    private String match;
-    private String userEmail;
-    private Interest interest;
+    private final String id;
+    private final String userEmail;
+    private final Sale sale;
 }

@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.matcher.infra.client.dto;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class SaleDTO {
     private final String id;
     private final String address;
