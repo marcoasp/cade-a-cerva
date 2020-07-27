@@ -35,6 +35,7 @@
         <module>ui</module>
         <module>tests-report</module>
         <module>test-commons</module>
+        <module>matcher</module>
     </modules>
 
     <parent>
