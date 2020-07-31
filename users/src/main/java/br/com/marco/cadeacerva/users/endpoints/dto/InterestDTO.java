@@ -18,4 +18,8 @@ public class InterestDTO {
         this.tags.addAll(interest.getTags());
         this.pricePerLiter = interest.getPricePerLiter();
     }
+
+    public static InterestDTO from(final Interest interest) {
+        return new InterestDTO(interest);
+    }
 }

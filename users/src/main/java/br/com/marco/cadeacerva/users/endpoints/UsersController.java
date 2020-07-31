@@ -1,5 +1,6 @@
 package br.com.marco.cadeacerva.users.endpoints;
 
+import br.com.marco.cadeacerva.users.application.UserApplicationService;
 import br.com.marco.cadeacerva.users.domain.Interest;
 import br.com.marco.cadeacerva.users.domain.User;
 import br.com.marco.cadeacerva.users.domain.UserProducer;
@@ -23,7 +24,7 @@ import static java.util.stream.Collectors.*;
 public class UsersController {
 
     private final UsersRepository usersRepository;
-    private final UserProducer userProducer;
+    private final UserApplicationService applicationService;
 
     @PutMapping("/{email}")
     public UserDTO save(@PathVariable("email") String email, @RequestBody UserDTO userDto) {
@@ -35,14 +36,6 @@ public class UsersController {
 
     @PutMapping("/me")
     public UserDTO update(@AuthenticationPrincipal Jwt auth, @RequestBody UserDTO userDTO) {
-        User user = usersRepository.findByEmail(auth.getClaimAsString("email"))
-                .map((foundUser) -> usersRepository.save(foundUser.update(
-                        userDTO.getLocation(),
-                        userDTO.getArea(),
-                        userDTO.getInterests().stream().map(ui -> new Interest(ui.getTags(), ui.getPricePerLiter())).collect(toList()))
-                ))
-                .orElseThrow(NotFoundException::new);
-        userProducer.produceUserMessage(user);
-        return new UserDTO(user);
+        return applicationService.updateUser(auth.getClaimAsString("email"), userDTO);
     }
 }

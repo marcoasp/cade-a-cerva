@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.users.contracts;
 
 import br.com.marco.cadeacerva.testcommons.utils.annotation.WithJwtUser;
+import br.com.marco.cadeacerva.users.application.UserApplicationService;
 import br.com.marco.cadeacerva.users.domain.User;
 import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
@@ -22,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -37,6 +39,9 @@ public class ContractsBaseClass {
     @MockBean
     private UsersRepository usersRepository;
 
+    @MockBean
+    private UserApplicationService userApplicationService;
+
     @Autowired
     private UserProducer userProducer;
 
@@ -45,6 +50,7 @@ public class ContractsBaseClass {
         RestAssuredMockMvc.webAppContextSetup(this.context);
         when(usersRepository.findByEmail("existing-user@email.com")).thenReturn(Optional.of(new User("existing-user@email.com")));
         when(usersRepository.save(any(User.class))).then(AdditionalAnswers.returnsFirstArg());
+        when(userApplicationService.updateUser(anyString(), any())).then(AdditionalAnswers.returnsArgAt(1));
     }
 
     public void sendUserMessageTriggered() {

@@ -3,9 +3,12 @@ package br.com.marco.cadeacerva.users.endpoints;
 import br.com.marco.cadeacerva.testcommons.utils.JsonPayloadProvider;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.IntegrationTest;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.WithJwtUser;
+import br.com.marco.cadeacerva.users.application.UserApplicationService;
 import br.com.marco.cadeacerva.users.domain.User;
 import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
+import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
+import br.com.marco.cadeacerva.users.endpoints.exception.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,9 @@ public class UsersControllerTest {
     @MockBean
     UserProducer userProducer;
 
+    @MockBean
+    UserApplicationService userApplicationService;
+
     @Test
     public void shouldCreateUnexistentUser() throws Exception {
         String email = "test@email.com";
@@ -79,32 +85,28 @@ public class UsersControllerTest {
     @Test
     @WithJwtUser
     public void shouldUpdateUser() throws Exception {
-        String email = "test@email.com";
-        User currentUser = new User(email);
-        when(usersRepository.findByEmail(email)).thenReturn(Optional.of(currentUser));
-        when(usersRepository.save(currentUser)).then(i -> i.getArgument(0, User.class));
+        when(userApplicationService.updateUser(anyString(), any())).then(i -> i.getArgument(1, UserDTO.class));
         mockMvc.perform(
-                put("/user/me", email)
+                put("/user/me")
                         .content(JsonPayloadProvider.from(this.getClass(), "shouldUpdateUser"))
                         .contentType(MediaType.APPLICATION_JSON)
         )
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.email", equalTo(email)))
+        .andExpect(jsonPath("$.email", equalTo("email@email.com")))
         .andExpect(jsonPath("$.location", hasItems(10.0, 20.5)))
         .andExpect(jsonPath("$.area", equalTo(3.5)))
         .andExpect(jsonPath("$.interests.[0].tags", hasItems("beer1", "beer2")))
         .andExpect(jsonPath("$.interests.[0].pricePerLiter", equalTo(5.5)))
         ;
 
-        verify(usersRepository).save(any());
-        verify(userProducer).produceUserMessage(any(User.class));
+        verify(userApplicationService).updateUser(anyString(), any());
     }
 
     @Test
     @WithJwtUser
     public void shouldReturn404ForNotExistingUser() throws Exception {
         String email = "test@email.com";
-        when(usersRepository.findByEmail(email)).thenReturn(Optional.empty());
+        when(userApplicationService.updateUser(anyString(), any())).thenThrow(new NotFoundException());
         mockMvc.perform(
                 put("/user/me", email)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -112,7 +114,5 @@ public class UsersControllerTest {
         )
                 .andExpect(status().isNotFound())
         ;
-
-        verify(usersRepository, never()).save(any());
     }
 }
