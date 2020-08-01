@@ -21,6 +21,10 @@ server.servlet.context-path: /
 spring:
   profiles: "integration-tests"
   cloud:
+    stream:
+      source: sales
+      bindings:
+        sales-out-0.destination: sales
     config:
       enabled: false
       discovery.enabled: false
@@ -34,12 +38,3 @@ spring:
 eureka:
   client:
     enabled: false
-
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          mongodb:
-            core:
-              MongoTemplate: DEBUG

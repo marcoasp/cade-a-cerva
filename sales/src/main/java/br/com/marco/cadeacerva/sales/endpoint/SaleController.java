@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.sales.endpoint;
 
 import br.com.marco.cadeacerva.sales.domain.Sale;
+import br.com.marco.cadeacerva.sales.domain.SaleProducer;
 import br.com.marco.cadeacerva.sales.domain.SaleRepository;
 import br.com.marco.cadeacerva.sales.domain.SaleSearchCriteriaWrapper;
 import br.com.marco.cadeacerva.sales.endpoint.dto.SaleDTO;
@@ -20,10 +21,13 @@ import java.util.List;
 public class SaleController {
 
     private final SaleRepository saleRepository;
+    private final SaleProducer saleProducer;
 
     @PostMapping
     public SaleDTO create(@RequestBody SaleDTO newSale) {
-        return new SaleDTO(saleRepository.save(new Sale(newSale.getAddress(), newSale.getTags(), newSale.getPricePerLiter(), newSale.getLocation())));
+        SaleDTO saleDto = SaleDTO.from(saleRepository.save(new Sale(newSale.getAddress(), newSale.getTags(), newSale.getPricePerLiter(), newSale.getLocation())));
+        saleProducer.produce(saleDto);
+        return saleDto;
     }
 
     @GetMapping

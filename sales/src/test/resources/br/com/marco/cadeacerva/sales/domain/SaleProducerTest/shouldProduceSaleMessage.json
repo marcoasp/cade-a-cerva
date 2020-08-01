@@ -1,0 +1,13 @@
+{
+  "id": null,
+  "address": "address",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "pricePerLiter": 10.0,
+  "location": [
+    20.0,
+    30.0
+  ]
+}

@@ -1,8 +1,10 @@
 package br.com.marco.cadeacerva.sales.contracts;
 
 import br.com.marco.cadeacerva.sales.domain.Sale;
+import br.com.marco.cadeacerva.sales.domain.SaleProducer;
 import br.com.marco.cadeacerva.sales.domain.SaleRepository;
 import br.com.marco.cadeacerva.sales.domain.SaleSearchCriteriaWrapper;
+import br.com.marco.cadeacerva.sales.endpoint.dto.SaleDTO;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.ContractTest;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
@@ -10,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +30,7 @@ import static org.mockito.Mockito.when;
 @ContractTest
 @SpringBootTest
 @WithMockUser
+@AutoConfigureMessageVerifier
 public class ContractsBaseClass {
 
     @Autowired
@@ -34,6 +38,9 @@ public class ContractsBaseClass {
 
     @MockBean
     SaleRepository saleRepository;
+
+    @Autowired
+    SaleProducer saleProducer;
 
     @Before
     public void setUp() {
@@ -43,5 +50,9 @@ public class ContractsBaseClass {
                         Arrays.asList(
                                 new Sale("address", Arrays.asList("tag1", "tag2"), 10.0, new double[]{10.0, 20.0})
                         ), PageRequest.of(0, 1), 2));
+    }
+
+    public void sendNewSaleMessageTriggered() {
+        saleProducer.produce(SaleDTO.from(new Sale("address", Arrays.asList("tag1", "tag2"), 10.0, new double[]{20.0, 30.0})));
     }
 }

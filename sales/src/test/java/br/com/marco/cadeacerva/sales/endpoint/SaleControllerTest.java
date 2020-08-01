@@ -1,6 +1,7 @@
 package br.com.marco.cadeacerva.sales.endpoint;
 
 import br.com.marco.cadeacerva.sales.domain.Sale;
+import br.com.marco.cadeacerva.sales.domain.SaleProducer;
 import br.com.marco.cadeacerva.sales.domain.SaleRepository;
 import br.com.marco.cadeacerva.sales.domain.SaleSearchCriteriaWrapper;
 import br.com.marco.cadeacerva.testcommons.utils.JsonPayloadProvider;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,6 +49,9 @@ public class SaleControllerTest {
     @MockBean
     SaleRepository saleRepository;
 
+    @MockBean
+    SaleProducer saleProducer;
+
     @Test
     public void shouldCreateSale() throws Exception {
         when(saleRepository.save(any(Sale.class))).then(AnswerUtils.argWithId("random-string"));
@@ -63,6 +68,8 @@ public class SaleControllerTest {
         .andExpect(jsonPath("$.location", hasItems(10.0, 20.5)))
         .andExpect(jsonPath("$.pricePerLiter", equalTo(50.0)))
         ;
+
+        verify(saleProducer).produce(any());
     }
 
     @Test
