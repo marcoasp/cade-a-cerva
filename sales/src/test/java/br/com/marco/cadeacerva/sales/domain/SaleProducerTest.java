@@ -1,7 +1,6 @@
 package br.com.marco.cadeacerva.sales.domain;
 
 import br.com.marco.cadeacerva.sales.endpoint.dto.SaleDTO;
-import br.com.marco.cadeacerva.testcommons.utils.JsonPayloadProvider;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.IntegrationTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
-import org.springframework.cloud.stream.test.matcher.MessageQueueMatcher;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,7 +18,6 @@ import java.util.concurrent.BlockingQueue;
 
 import static br.com.marco.cadeacerva.testcommons.utils.JsonPayloadProvider.from;
 import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 

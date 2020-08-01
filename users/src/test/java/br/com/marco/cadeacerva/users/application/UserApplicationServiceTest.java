@@ -56,7 +56,7 @@ public class UserApplicationServiceTest {
         assertThat(result.getInterests().get(0).getTags(), hasItems("tag1", "tag2"));
 
         verify(userRepository).save(any());
-        verify(userProducer).produceUserMessage(any(User.class));
+        verify(userProducer).produceUserMessage(any());
     }
 
     @Test(expected = NotFoundException.class)
@@ -67,6 +67,6 @@ public class UserApplicationServiceTest {
         service.updateUser("email", updateDto);
 
         verify(userRepository).save(any());
-        verify(userProducer).produceUserMessage(any(User.class));
+        verify(userProducer).produceUserMessage(any());
     }
 }

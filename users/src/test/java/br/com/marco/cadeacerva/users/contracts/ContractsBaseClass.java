@@ -6,6 +6,7 @@ import br.com.marco.cadeacerva.users.domain.User;
 import br.com.marco.cadeacerva.users.domain.UserProducer;
 import br.com.marco.cadeacerva.users.domain.UsersRepository;
 import br.com.marco.cadeacerva.testcommons.utils.annotation.ContractTest;
+import br.com.marco.cadeacerva.users.endpoints.dto.UserDTO;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -54,6 +55,6 @@ public class ContractsBaseClass {
     }
 
     public void sendUserMessageTriggered() {
-        userProducer.produceUserMessage(new User("random-string", "existing-user@email.com", new double[]{10.0, 20.5}, 3.5));
+        userProducer.produceUserMessage(UserDTO.from(new User("random-string", "existing-user@email.com", new double[]{10.0, 20.5}, 3.5)));
     }
 }

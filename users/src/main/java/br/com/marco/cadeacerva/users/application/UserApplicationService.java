@@ -27,7 +27,7 @@ public class UserApplicationService {
                         userDTO.getInterests().stream().map(ui -> new Interest(ui.getTags(), ui.getPricePerLiter())).collect(toList()))
                 ))
                 .orElseThrow(NotFoundException::new);
-        userProducer.produceUserMessage(user);
+        userProducer.produceUserMessage(UserDTO.from(user));
         return new UserDTO(user);
     }
 

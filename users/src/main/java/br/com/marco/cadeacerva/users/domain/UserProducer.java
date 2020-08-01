@@ -14,7 +14,8 @@ public class UserProducer {
 
     private final StreamBridge streamBridge;
 
-    public void produceUserMessage(User user) {
-        streamBridge.send("users-out-0", MessageBuilder.withPayload(new UserDTO(user)).build());
+    public void produceUserMessage(UserDTO user) {
+        log.info("Producing User: {}", user.toString());
+        streamBridge.send("users-out-0", MessageBuilder.withPayload(user).build());
     }
 }

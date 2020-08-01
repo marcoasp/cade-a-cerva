@@ -11,9 +11,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class UsersApplication {
 
-	@Autowired
-	private UserProducer userProducer;
-
 	public static void main(String[] args) {
 		SpringApplication.run(UsersApplication.class, args);
 	}

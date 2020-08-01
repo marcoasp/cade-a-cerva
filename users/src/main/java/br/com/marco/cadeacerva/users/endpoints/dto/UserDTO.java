@@ -1,10 +1,10 @@
 package br.com.marco.cadeacerva.users.endpoints.dto;
 
-import br.com.marco.cadeacerva.users.domain.Interest;
 import br.com.marco.cadeacerva.users.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@ToString
 public class UserDTO {
 
     private final String id;
@@ -28,5 +29,9 @@ public class UserDTO {
         this.location = user.getLocation();
         this.area = user.getArea();
         this.interests.addAll(user.getInterests().stream().collect(Collectors.mapping(InterestDTO::new, toList())));
+    }
+
+    public static UserDTO from(final User user) {
+        return new UserDTO(user);
     }
 }
