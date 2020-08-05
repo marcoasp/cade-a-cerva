@@ -1,6 +1,6 @@
-package br.com.marco.cadeacerva.sales.infra.listener;
+package br.com.marco.cadeacerva.matcher.infra.listener;
 
-import br.com.marco.cadeacerva.sales.domain.Sale;
+import br.com.marco.cadeacerva.matcher.domain.sale.Sale;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

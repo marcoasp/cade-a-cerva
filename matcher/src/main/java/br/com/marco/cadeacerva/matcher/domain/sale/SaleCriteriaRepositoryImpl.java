@@ -1,5 +1,6 @@
-package br.com.marco.cadeacerva.sales.domain;
+package br.com.marco.cadeacerva.matcher.domain.sale;
 
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +16,7 @@ public class SaleCriteriaRepositoryImpl implements SaleCriteriaRepository {
     private final MongoTemplate template;
 
     @Override
-    public Page<Sale> findBy(final SaleSearchCriteriaWrapper criteria, final Pageable pageable) {
-        Query countQuert = criteria.createQuery();
-        Query query = Query.of(countQuert).with(pageable);
-        List<Sale> result = template.find(query, Sale.class);
-        return PageableExecutionUtils.getPage(result, pageable, () -> template.count(countQuert, Sale.class));
+    public List<Sale> findBy(final SaleSearchCriteriaWrapper criteria) {
+        return template.aggregate(criteria.createQuery(), "sale", Sale.class).getMappedResults();
     }
 }

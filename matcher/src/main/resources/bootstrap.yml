@@ -38,6 +38,7 @@ spring:
   profiles: "integration-tests"
   cloud:
     stream:
+      source: users
       bindings:
         users-in-0:
           destination: users
@@ -51,3 +52,12 @@ spring:
 eureka:
   client:
     enabled: false
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG

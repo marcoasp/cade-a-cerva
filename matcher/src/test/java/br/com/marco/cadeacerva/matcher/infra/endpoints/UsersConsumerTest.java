@@ -6,14 +6,22 @@ import br.com.marco.cadeacerva.testcommons.utils.annotation.IntegrationTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
+import org.springframework.cloud.stream.binder.test.InputDestination;
 import org.springframework.cloud.stream.binder.test.OutputDestination;
+import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -33,12 +41,16 @@ public class UsersConsumerTest {
     UserInterestsAggregator consumer;
 
     @Autowired
-    OutputDestination output;
+    @Qualifier("users-in-0")
+    MessageChannel inputDestination;
+
+    @Autowired
+    MessageCollector messageCollector;
 
     @Test
     public void shouldConsumeUsersEvents() {
         trigger.trigger("sendUserMessage");
-        Message<byte[]> message = output.receive();
+        BlockingQueue<Message<?>> queue = messageCollector.forChannel(inputDestination);
         verify(consumer).aggregate(any(UserDTO.class));
     }
 }
