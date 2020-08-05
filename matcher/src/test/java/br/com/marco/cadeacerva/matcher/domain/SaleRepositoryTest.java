@@ -70,9 +70,11 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldNotConsideredAlreadyExistingMatches() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper("user1@email.com",
-                new double[]{-23.2023046,-45.8639857},
-                10, Collections.emptyList());
+        SaleSearchCriteriaWrapper criteria = SaleSearchCriteriaWrapper.builder()
+                .userEmail("user1@email.com")
+                .location(new double[]{-23.2023046,-45.8639857})
+                .distance(10).build();
+
         List<Sale> page = repository.findBy(criteria);
 
         assertThat(page.size(), equalTo(3));
@@ -81,9 +83,10 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldReturnNearResults() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper("user2@email.com",
-                new double[]{-23.2023046,-45.8639857},
-                10, Collections.emptyList());
+        SaleSearchCriteriaWrapper criteria = SaleSearchCriteriaWrapper.builder()
+                .userEmail("user2@email.com")
+                .location(new double[]{-23.2023046,-45.8639857})
+                .distance(10).build();
         List<Sale> page = repository.findBy(criteria);
 
         assertThat(page.size(), equalTo(4));
@@ -92,10 +95,11 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldSearchByTagOnly() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper("user2@email.com",
-                new double[]{-23.2023046,-45.8639857},
-                10,
-                Arrays.asList(SearchCriteria.builder().tags(Arrays.asList("tag1")).build()));
+        SaleSearchCriteriaWrapper criteria = SaleSearchCriteriaWrapper.builder()
+        .userEmail("user2@email.com")
+        .location(new double[]{-23.2023046,-45.8639857})
+                .distance(10)
+                .interestsCriteria(Arrays.asList(SearchCriteria.builder().tags(Arrays.asList("tag1")).build())).build();
         List<Sale> sales = repository.findBy(criteria);
 
         assertThat(sales.size(), equalTo(1));
@@ -104,10 +108,11 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldSearchByPriceOnly() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper("user2@email.com",
-                new double[]{-23.2023046,-45.8639857},
-                10,
-                Arrays.asList(SearchCriteria.builder().pricePerLiter(10.0).build()));
+        SaleSearchCriteriaWrapper criteria = SaleSearchCriteriaWrapper.builder()
+            .userEmail("user2@email.com")
+            .location(new double[]{-23.2023046,-45.8639857})
+            .distance(10)
+            .interestsCriteria(Arrays.asList(SearchCriteria.builder().pricePerLiter(10.0).build())).build();
         List<Sale> sales = repository.findBy(criteria);
 
         assertThat(sales.size(), equalTo(2));
@@ -117,11 +122,11 @@ public class SaleRepositoryTest {
 
     @Test
     public void shouldSearchByTagAndPrice() {
-        SaleSearchCriteriaWrapper criteria = new SaleSearchCriteriaWrapper(
-                "user2@email.com",
-                new double[]{-23.2023046,-45.8639857},
-                10,
-                Arrays.asList(SearchCriteria.builder().tags(Arrays.asList("tag1")).pricePerLiter(10.0).build()));
+        SaleSearchCriteriaWrapper criteria = SaleSearchCriteriaWrapper.builder()
+        .userEmail("user2@email.com")
+                .location(new double[]{-23.2023046,-45.8639857})
+                .distance(10)
+                .interestsCriteria(Arrays.asList(SearchCriteria.builder().tags(Arrays.asList("tag1")).pricePerLiter(10.0).build())).build();
         List<Sale> sales = repository.findBy(criteria);
 
         assertThat(sales.size(), equalTo(1));

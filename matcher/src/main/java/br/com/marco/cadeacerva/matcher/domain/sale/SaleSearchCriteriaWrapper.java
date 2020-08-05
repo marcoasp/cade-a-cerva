@@ -1,6 +1,9 @@
 package br.com.marco.cadeacerva.matcher.domain.sale;
 
 import br.com.marco.cadeacerva.matcher.endpoints.dto.UserDTO;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
@@ -9,34 +12,34 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SaleSearchCriteriaWrapper {
 
     private final String userEmail;
     private final double[] location;
     private final double distance;
-    private final List<SearchCriteria> criterias = new ArrayList<>();
-
-    public SaleSearchCriteriaWrapper(final String userEmail, double[] location, double distance, final List<SearchCriteria> criterias) {
-        this.userEmail = userEmail;
-        this.location = location;
-        this.distance = distance;
-        this.criterias.addAll(criterias);
-    }
+    private final List<SearchCriteria> interestsCriteria;
 
     public static SaleSearchCriteriaWrapper from(final UserDTO user) {
-        return new SaleSearchCriteriaWrapper(user.getEmail(), user.getLocation(), user.getArea(), user.getInterests().stream().map(i -> SearchCriteria.of(user, i)).collect(toList()));
+        return SaleSearchCriteriaWrapper.builder()
+                .userEmail(user.getEmail())
+                .location(user.getLocation())
+                .distance(user.getArea())
+                .interestsCriteria(user.getInterests().stream().map(i -> SearchCriteria.of(user, i)).collect(toList()))
+                .build();
     }
 
-    public Aggregation createQuery() {
-        List<Criteria> criterias = this.criterias.stream().map(SearchCriteria::build).collect(toList());
-        Criteria criteria = new Criteria();
-        if(!CollectionUtils.isEmpty(criterias)) {
-            criteria.orOperator(criterias.toArray(new Criteria[criterias.size()]));
+    Aggregation createQuery() {
+        Criteria criteria = new  Criteria();
+        if(!CollectionUtils.isEmpty(this.interestsCriteria)) {
+            criteria.orOperator(this.interestsCriteria.stream().map(SearchCriteria::build).collect(toList()).toArray(new Criteria[0]));
         }
         return Aggregation.newAggregation(
                 Aggregation.geoNear(NearQuery.near(new Point(location[0],location[1])).maxDistance(new Distance(distance, Metrics.KILOMETERS).getNormalizedValue()).spherical(true), "location"),
